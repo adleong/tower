@@ -74,6 +74,15 @@ pub mod delay {
         delay: Option<Delay>,
     }
 
+    impl<B> Breaker<B> {
+        pub fn new(break_until: B, delay: Option<Delay>) -> Self {
+            Breaker {
+                break_until,
+                delay,
+            }
+        }
+    }
+
     impl<M, B: BreakUntil<M>> super::Breaker<M> for Breaker<B> {
         type Error = timer::Error;
 
